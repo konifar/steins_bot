@@ -10,7 +10,22 @@
 
 module.exports = (robot) ->
   robot.hear /(とぅっとぅる|トゥットゥル)/i, (msg) ->
-    msg.send "とぅっとぅるー♪まゆしぃです"
+    msg.send "とぅっとぅるー！まゆしぃです♪"
+
+  robot.hear /Success:  .*. build/, (msg) ->
+    msg.send msg.random [
+        "テストもばっちりだね！オカリン♪",
+        "えっへへー、いい感じ！",
+        "まゆしぃはとっても嬉しいのです！"
+    ]
+
+  robot.hear /Failed:  .*. build/, (msg) ->
+    msg.send msg.random [
+        "ねぇねぇ、なにがあったのー？顔色、すごく悪いけど・・・",
+        "あー！まゆしぃのバナナ、ゲルバナになってるー！",
+        "ごめんなさい～",
+        "きっと、この暑さのせいだよー♪ トゥットゥルー♪"
+    ]
 
   # robot.hear /badger/i, (msg) ->
   #   msg.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
