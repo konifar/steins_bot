@@ -9,7 +9,23 @@
 #   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
 module.exports = (robot) ->
+  attachment = (name, icon_url, msg) ->
+    robot.emit 'slack.attachment',
+      message: msg.message
+      # content:
+        # see https://api.slack.com/docs/attachments
+        # text: text
+        # fallback: "Attachment fallback"
+        # fields: [{
+        #   title: "Field title"
+        #   value: "Field value"
+        # }]
+      channel: "#scroll_technique"
+      username: name
+      icon_url: icon_url
+
   robot.hear /(とぅっとぅる|トゥットゥル)/i, (msg) ->
+    attachment "まゆり", "http://file.chihaya72.zoku-sei.com/sg0605.jpg", msg
     msg.send "とぅっとぅるー！まゆしぃです♪"
 
   robot.hear /Success:  .*. build/, (msg) ->
