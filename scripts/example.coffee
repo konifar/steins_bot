@@ -11,7 +11,8 @@
 module.exports = (robot) ->
   process.env.HUBOT_SLACK_INCOMING_WEBHOOK = 'https://hooks.slack.com/services/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'
 
-  attachment = (name, icon_url, text) ->
+  attachment = (name, icon_url, text, msg) ->
+    message: msg.message
     robot.emit 'slack.attachment',
       content:
         text: text
@@ -19,12 +20,12 @@ module.exports = (robot) ->
       username: name
       icon_url: icon_url
 
-  attach_mayuri = (text)->
-    attachment 'まゆしぃ', '../images/mayuri.png', text
+  attach_mayuri = (text, msg)->
+    attachment 'まゆしぃ', '../images/mayuri.png', text, msg
 
   robot.hear /(とぅっとぅる|トゥットゥル)/i, (msg) ->
     text = "とぅっとぅるー！まゆしぃです♪"
-    attach_mayuri text
+    attach_mayuri text, msg
     msg.send text
 
   robot.hear /Success:  .*. build/, (msg) ->
