@@ -8,9 +8,9 @@
 #
 #   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
-process.env.HUBOT_SLACK_INCOMING_WEBHOOK = 'https://hooks.slack.com/services/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'
-
 module.exports = (robot) ->
+  process.env.HUBOT_SLACK_INCOMING_WEBHOOK = 'https://hooks.slack.com/services/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'
+
   attachment = (name, icon_url, text) ->
     robot.emit 'slack.attachment',
       content:
@@ -20,7 +20,7 @@ module.exports = (robot) ->
       icon_url: icon_url
 
   attach_mayuri = (text)->
-    attachment('まゆしぃ', '../images/mayuri.png', text)
+    attachment 'まゆしぃ', '../images/mayuri.png', text
 
   robot.hear /(とぅっとぅる|トゥットゥル)/i, (msg) ->
     text = "とぅっとぅるー！まゆしぃです♪"
