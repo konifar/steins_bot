@@ -15,7 +15,7 @@ module.exports = (robot) ->
     robot.emit 'slack.attachment',
       content:
         text: text
-      channel: "#scroll_technique"
+      channel: "#scroll-technique"
       username: name
       icon_url: icon_url
 
