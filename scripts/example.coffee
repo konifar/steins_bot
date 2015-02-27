@@ -8,25 +8,24 @@
 #
 #   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
+process.env.HUBOT_SLACK_INCOMING_WEBHOOK = 'https://hooks.slack.com/services/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'
+
 module.exports = (robot) ->
-  attachment = (name, icon_url, msg) ->
+  attachment = (name, icon_url, text) ->
     robot.emit 'slack.attachment',
-      message: msg.message
-      # content:
-        # see https://api.slack.com/docs/attachments
-        # text: text
-        # fallback: "Attachment fallback"
-        # fields: [{
-        #   title: "Field title"
-        #   value: "Field value"
-        # }]
+      content:
+        text: text
       channel: "#scroll_technique"
       username: name
       icon_url: icon_url
 
+  attach_mayuri = (text)->
+    attachment('まゆしぃ', '../images/mayuri.png', text)
+
   robot.hear /(とぅっとぅる|トゥットゥル)/i, (msg) ->
-    attachment "まゆり", "http://file.chihaya72.zoku-sei.com/sg0605.jpg", msg
-    msg.send "とぅっとぅるー！まゆしぃです♪"
+    text = "とぅっとぅるー！まゆしぃです♪"
+    attach_mayuri text
+    msg.send text
 
   robot.hear /Success:  .*. build/, (msg) ->
     msg.send msg.random [
