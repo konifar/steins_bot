@@ -8,34 +8,24 @@
 #
 #   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
+process.env.HUBOT_SLACK_INCOMING_WEBHOOK = 'https://hooks.slack.com/services/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'
+
 module.exports = (robot) ->
-  process.env.HUBOT_SLACK_INCOMING_WEBHOOK = 'https://hooks.slack.com/services/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'
-
-  attachment = (name, icon_url, text, msg) ->
-    message: msg.message
-    robot.emit 'slack.attachment',
-      content:
-        text: text
-      channel: "#scroll-technique"
-      username: name
-      icon_url: icon_url
-
-  attach_mayuri = (text, msg)->
-    attachment 'まゆしぃ', '../images/mayuri.png', text, msg
 
   robot.hear /(とぅっとぅる|トゥットゥル)/i, (msg) ->
-    text = "とぅっとぅるー！まゆしぃです♪"
-    attach_mayuri text, msg
-    msg.send text
+    msg.send msg.random [
+      "とぅっとぅるー！まゆしぃです♪",
+      "おかえりん♪ おかえりってオカリンに似てるねぇ"
+    ]
 
-  robot.hear /Success:  .*. build/, (msg) ->
+  robot.hear /Success:  .*. build/i, (msg) ->
     msg.send msg.random [
         "テストもばっちりだね！オカリン♪",
         "えっへへー、いい感じ！",
         "まゆしぃはとっても嬉しいのです！"
     ]
 
-  robot.hear /Failed:  .*. build/, (msg) ->
+  robot.hear /Failed:  .*. build/i, (msg) ->
     msg.send msg.random [
         "ねぇねぇ、なにがあったのー？顔色、すごく悪いけど・・・",
         "あー！まゆしぃのバナナ、ゲルバナになってるー！",
